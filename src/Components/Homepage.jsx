@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 
 export default function Home() {
@@ -8,6 +9,8 @@ export default function Home() {
     let [product, setProduct] = useState([]);
     let [search, setSearch] = useState('');
     let [count, setCount] = useState(0);
+
+    let Navigatepg = useNavigate();
 
     function adding() {
         setCount(++count);
@@ -37,7 +40,7 @@ export default function Home() {
                     <Link to="/signinpage"><button className='navbtn'><li><b>Sign Up</b></li></button></Link>
                     <Link to="/loginpage"><button className='navbtn'><li><b>Log In</b></li></button></Link>
                     <button className='navbtn'><li><i className="fa-solid fa-cart-shopping"></i><b> Add to Cart: <span style={{ color: 'white', fontSize: '15px' }}>{count}</span></b></li></button>
-                    <button className='navbtn' onClick={tozero}><li><i className="fa-solid fa-trash">Reset</i></li></button>
+                    <button className='navbtn' onClick={tozero}><li><i className="fa-solid fa-trash">Empty Cart</i></li></button>
                 </ul>
             </nav>
             <br /><br /><br />
@@ -60,7 +63,7 @@ export default function Home() {
                                 <p>{data.title}</p>
                                 <p>Price:  ${data.price}</p> <br />
                                 <button id='btn1' className='shopbtns' onClick={adding}>Add to Cart</button>
-                                <button id='btn2' className='shopbtns'> Buy Now</button>
+                                <button id='btn2' className='shopbtns' onClick={()=>Navigatepg("/SinglePage",{state:{data}})}> Buy Now</button>
                             </div>
                         </div>
                     )
